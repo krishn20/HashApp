@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="32dp">
+
+    <!-- We added 65dp of BottomMargin as our layout height is 32dp
+    and we want it ot be invisible until called therefore we double+1 the
+    value to ensure it's not visible anyhow.-->
+
+    <View
+        android:id="@+id/message_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="65dp"
+        android:background="@color/redish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/message_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/copied"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/message_bg"
+        app:layout_constraintEnd_toEndOf="@+id/message_bg"
+        app:layout_constraintStart_toStartOf="@+id/message_bg"
+        app:layout_constraintTop_toTopOf="@+id/message_bg" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
