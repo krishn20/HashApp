@@ -54,6 +54,10 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+
+
+    //------------------ Menu Related Functions -----------------------------------//
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_menu, menu)
     }
@@ -69,8 +73,26 @@ class HomeFragment : Fragment() {
         return true
     }
 
-    //----------------------------------------------User defined functions--------------------------------------------------------//
+
+
     //----------------------------------------------------------------------------------------------------------------------------//
+    //----------------------------------------------User defined functions--------------------------------------------------------//
+
+
+    private fun onGenerateClicked()
+    {
+        if(binding.editTextMessage.text.isEmpty())
+        {
+            showSnackBar("Text is empty!")
+        }
+        else
+        {
+            lifecycleScope.launch {
+                applyAnimations()
+                navigateToSuccess(getHashData())
+            }
+        }
+    }
 
     //Making a function for animations
     private suspend fun applyAnimations()
@@ -100,6 +122,15 @@ class HomeFragment : Fragment() {
         delay(1500)
     }
 
+
+    private fun getHashData(): String
+    {
+        val algorithm = binding.autoCompleteTextView.text.toString()
+        val text = binding.editTextMessage.text.toString()
+
+        return homeViewModel.getHash(text, algorithm)
+    }
+
     private fun navigateToSuccess(hash: String)
     {
         //Earlier we didn't need to pass any value here. So we just used findNavController to navigate to the Success Fragment using the action property created.
@@ -122,30 +153,6 @@ class HomeFragment : Fragment() {
         snackBar.setAction("Okay"){}
         snackBar.setActionTextColor(ContextCompat.getColor(requireContext(), R.color.greenish))
         snackBar.show()
-    }
-
-    private fun getHashData(): String
-    {
-        val algorithm = binding.autoCompleteTextView.text.toString()
-        val text = binding.editTextMessage.text.toString()
-
-        return homeViewModel.getHash(text, algorithm)
-    }
-
-    private fun onGenerateClicked()
-    {
-        if(binding.editTextMessage.text.isEmpty())
-        {
-            showSnackBar("Text is empty!")
-        }
-        else
-        {
-            lifecycleScope.launch {
-                applyAnimations()
-                navigateToSuccess(getHashData())
-            }
-        }
-
     }
 
 
